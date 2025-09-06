@@ -11,16 +11,17 @@ export default {
     if (assetResp.status !== 404) return assetResp;
 
     // 2) DO にフォワード（pathname + search をそのまま引き継ぐ）
-    const url = new URL(request.url);
-    const doUrl = "https://do.internal" + url.pathname + url.search;
+    const id = env.ReversiDO.idFromName("global");
+    const stub = env.ReversiDO.get(id);
 
-    // いまはグローバル 1 インスタンスに集約（必要になったら idFromName(roomId) に切替）
-    const doId = env.ReversiDO.idFromName("global-room");
-    const stub = env.ReversiDO.get(doId);
+    const doUrl = new URL(request.url);
+    doUrl.protocol = "http:";
+    doUrl.host = "do";
 
-    // 元のメソッド/ヘッダー/ボディを保持しつつ、URL だけ差し替えて転送
-    const doRequest = new Request(doUrl, request);
-    return await stub.fetch(doRequest);
+    // メソッド/ヘッダ/ボディは request から引き継ぎ、URL だけ差し替え
+    const doReq = new Request(doUrl.toString(), request);
+    return stub.fetch(doReq);
+
   },
 };
 export { ReversiDO } from "./ReversiDO";
