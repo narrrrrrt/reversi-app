@@ -1,8 +1,8 @@
 import { sse } from "./handlers/sse";
 import { join } from "./handlers/join";
-import { move } from "./handlers/move";
-import { leave } from "./handlers/leave";
-import { reset } from "./handlers/reset";
+//import { move } from "./handlers/move";
+//import { leave } from "./handlers/leave";
+//import { reset } from "./handlers/reset";
 
 const handlers: Record<string, Function> = { sse, join, move, leave, reset };
 
