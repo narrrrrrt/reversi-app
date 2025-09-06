@@ -23,3 +23,4 @@ export default {
     return await stub.fetch(doRequest);
   },
 };
+export { ReversiDO } from "./ReversiDO";
