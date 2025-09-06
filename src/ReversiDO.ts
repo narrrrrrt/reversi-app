@@ -4,7 +4,8 @@ import { join } from "./handlers/join";
 //import { leave } from "./handlers/leave";
 //import { reset } from "./handlers/reset";
 
-const handlers: Record<string, Function> = { sse, join, move, leave, reset };
+//const handlers: Record<string, Function> = { sse, join, move, leave, reset };
+const handlers: Record<string, Function> = { sse, join, move };
 
 export class ReversiDO {
   state: DurableObjectState;
