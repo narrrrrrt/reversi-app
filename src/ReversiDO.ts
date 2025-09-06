@@ -1,4 +1,10 @@
-import * as handlers from "./handlers";
+import { sse } from "./handlers/sse";
+import { join } from "./handlers/join";
+import { move } from "./handlers/move";
+import { leave } from "./handlers/leave";
+import { reset } from "./handlers/reset";
+
+const handlers: Record<string, Function> = { sse, join, move, leave, reset };
 
 export class ReversiDO {
   state: DurableObjectState;
@@ -11,9 +17,10 @@ export class ReversiDO {
 
   async fetch(request: Request): Promise<Response> {
     const url = new URL(request.url);
-    const path = url.pathname.slice(1); // 先頭の / を削除
+    const path = url.pathname.slice(1); // "/join" → "join"
 
     if (path in handlers) {
+      // 該当するハンドラーがあれば呼び出し
       return (handlers as any)[path](this, request);
     }
 
