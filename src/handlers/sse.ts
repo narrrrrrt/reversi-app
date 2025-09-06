@@ -1,5 +1,4 @@
 // sse
-import { createRoom } from "../schema/initial";
 import { Room } from "../schema/types";
 
 // ルームごとの状態管理
