@@ -1,19 +1,17 @@
 window.addEventListener("load", () => {
-  const roomIds = [1, 2, 3, 4];
+  const roomIds = ["a", "b", "c", "d"];
 
-  roomIds.forEach((id) => {
-    const evtSource = new EventSource(`/sse?id=${id}`);
+  roomIds.forEach(id => {
+    const eventSource = new EventSource(`/sse?id=${id}`);
 
-    evtSource.onmessage = (event) => {
-      const el = document.getElementById(`room-${id}`);
-      if (el) {
-        el.textContent = event.data; // JSONそのまま表示
-      }
-    };
+    eventSource.onmessage = (event) => {
+      // サーバーから返ってくる部屋ごとの状態
+      // 例: { black: "taken", white: "waiting", observers: 2 }
+      const state = JSON.parse(event.data);
 
-    evtSource.onerror = (err) => {
-      console.error(`SSE error (room ${id}):`, err);
-      evtSource.close();
+      document.getElementById(`room-${id}-b`).innerText = state.black;
+      document.getElementById(`room-${id}-w`).innerText = state.white;
+      document.getElementById(`room-${id}-o`).innerText = `Observers: ${state.observers}`;
     };
   });
 });

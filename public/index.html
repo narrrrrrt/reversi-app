@@ -1,27 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Lobby</title>
-  <script src="/js/lobby.js" defer></script>
+  <title>Reversi Lobby</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 40px; }
+    table { margin: auto; border-collapse: collapse; }
+    td { padding: 10px 20px; border: 1px solid #ccc; vertical-align: top; }
+    a { text-decoration: none; color: blue; display: block; margin-bottom: 8px; }
+    .status { font-size: 0.9em; color: #333; margin-top: 5px; }
+  </style>
 </head>
 <body>
-  <h1>Lobby</h1>
-  <div>
-    <h2>Room 1</h2>
-    <pre id="room-1">(waiting...)</pre>
-  </div>
-  <div>
-    <h2>Room 2</h2>
-    <pre id="room-2">(waiting...)</pre>
-  </div>
-  <div>
-    <h2>Room 3</h2>
-    <pre id="room-3">(waiting...)</pre>
-  </div>
-  <div>
-    <h2>Room 4</h2>
-    <pre id="room-4">(waiting...)</pre>
-  </div>
+  <h1>Reversi Lobby</h1>
+  <p>Choose a seat in one of the rooms:</p>
+
+  <table>
+    <tr>
+      <td>
+        <a href="room.html?id=a&seat=b">Room A - Black</a>
+        <a href="room.html?id=a&seat=w">Room A - White</a>
+        <a href="room.html?id=a&seat=o">Room A - Observer</a>
+        <div id="room-a" class="status">[Room A status here]</div>
+      </td>
+      <td>
+        <a href="room.html?id=b&seat=b">Room B - Black</a>
+        <a href="room.html?id=b&seat=w">Room B - White</a>
+        <a href="room.html?id=b&seat=o">Room B - Observer</a>
+        <div id="room-b" class="status">[Room B status here]</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="room.html?id=c&seat=b">Room C - Black</a>
+        <a href="room.html?id=c&seat=w">Room C - White</a>
+        <a href="room.html?id=c&seat=o">Room C - Observer</a>
+        <div id="room-c" class="status">[Room C status here]</div>
+      </td>
+      <td>
+        <a href="room.html?id=d&seat=b">Room D - Black</a>
+        <a href="room.html?id=d&seat=w">Room D - White</a>
+        <a href="room.html?id=d&seat=o">Room D - Observer</a>
+        <div id="room-d" class="status">[Room D status here]</div>
+      </td>
+    </tr>
+  </table>
+
+  <script src="js/lobby.js"></script>
 </body>
 </html>
