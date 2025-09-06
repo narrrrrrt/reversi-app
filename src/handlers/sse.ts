@@ -9,7 +9,7 @@ const clients = new Map<number, Set<WritableStreamDefaultWriter>>();
 export async function sse(request: Request): Promise<Response> {
   // id を一発でパース、なければ 400
   // bug const id = Number(new URL(request.url).searchParams.get("id"));
-  const id = new URL(request.url,, "http://dummy").searchParams.get("id");
+  const id = new URL(request.url, "http://dummy").searchParams.get("id");
   if (!id) return new Response("Invalid room id", { status: 400 });
 
   // ルームが存在しなければ初期化
