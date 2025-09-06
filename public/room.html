@@ -1,18 +1,12 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Room</title>
+  <meta charset="UTF-8" />
+  <title>Reversi Room</title>
+  <script src="./js/room.js" defer></script>
 </head>
 <body>
-  <h1>Room</h1>
-  <button id="btn">カウントアップ</button>
-  <p><a href="/">戻る</a></p>
-
-  <script>
-    document.getElementById("btn").onclick = async () => {
-      await fetch("/countup", { method: "POST" });
-    };
-  </script>
+  <h1>Reversi Room</h1>
+  <pre id="output">Connecting...</pre>
 </body>
 </html>
