@@ -14,8 +14,8 @@ class_name = "ReversiDO"
 
 [[migrations]]
 tag = "vxx"
-//delete_classes = ["CounterDO"]
-//new_classes = ["ReversiDO"]
+#delete_classes = ["CounterDO"]
+#new_classes = ["ReversiDO"]
 
 
 # 初回作成時はこちらを有効にする
