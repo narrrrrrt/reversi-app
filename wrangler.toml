@@ -13,7 +13,7 @@ class_name = "ReversiDO"
 # --- Durable Object migrations ---
 
 [[migrations]]
-tag = "vxx"
+tag = "vxxx"
 delete_classes = ["CounterDO"]
 #new_classes = ["ReversiDO"]
 
