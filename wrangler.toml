@@ -7,15 +7,15 @@ directory = "./public"
 binding = "ASSETS"
 
 [[durable_objects.bindings]]
-name = "CounterDO"
-class_name = "CounterDO"
+name = "ReversiDO"
+class_name = "ReversiDO"
 
 # --- Durable Object migrations ---
 
 [[migrations]]
 tag = "v1"
 # 初回作成時はこちらを有効にする
-new_sqlite_classes = ["CounterDO"]
+new_sqlite_classes = ["ReversiDO"]
 
 # 既に作成済みの DO を再利用するときはこちらを使う
-#new_classes = ["CounterDO"]
+#new_classes = ["ReversiDO"]
