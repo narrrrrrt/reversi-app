@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>Index</title>
+  <title>Lobby</title>
+  <script src="/js/lobby.js" defer></script>
 </head>
 <body>
-  <h1>来場者カウンター + タイマー</h1>
-  <p>現在時刻: <span id="time">...</span></p>
-  <p>カウンター: <span id="count">0</span></p>
-  <p><a href="/room.html">Roomへ</a></p>
-
-  <script>
-    const evtSource = new EventSource("/events");
-    evtSource.onmessage = (e) => {
-      const data = JSON.parse(e.data);
-      document.getElementById("time").textContent = data.timestamp;
-      document.getElementById("count").textContent = data.count;
-    };
-  </script>
+  <h1>Lobby</h1>
+  <div>
+    <h2>Room 1</h2>
+    <pre id="room-1">(waiting...)</pre>
+  </div>
+  <div>
+    <h2>Room 2</h2>
+    <pre id="room-2">(waiting...)</pre>
+  </div>
+  <div>
+    <h2>Room 3</h2>
+    <pre id="room-3">(waiting...)</pre>
+  </div>
+  <div>
+    <h2>Room 4</h2>
+    <pre id="room-4">(waiting...)</pre>
+  </div>
 </body>
 </html>

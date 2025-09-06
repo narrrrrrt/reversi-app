@@ -1,22 +1,22 @@
-export class CounterDO {
-  state: DurableObjectState;
+import * as handlers from "./handlers";
 
-  constructor(state: DurableObjectState) {
+export class ReversiDO {
+  state: DurableObjectState;
+  clients: Set<WritableStreamDefaultWriter>;
+
+  constructor(state: DurableObjectState, env: any) {
     this.state = state;
+    this.clients = new Set();
   }
 
   async fetch(request: Request): Promise<Response> {
     const url = new URL(request.url);
-    if (url.pathname.endsWith("/increment")) {
-      let count = (await this.state.storage.get<number>("count")) || 0;
-      count++;
-      await this.state.storage.put("count", count);
-      return new Response(JSON.stringify({ count }), { headers: { "Content-Type": "application/json" } });
+    const path = url.pathname.slice(1); // 先頭の / を削除
+
+    if (path in handlers) {
+      return (handlers as any)[path](this, request);
     }
-    if (url.pathname.endsWith("/current")) {
-      const count = (await this.state.storage.get<number>("count")) || 0;
-      return new Response(JSON.stringify({ count }), { headers: { "Content-Type": "application/json" } });
-    }
+
     return new Response("Not found", { status: 404 });
   }
 }
