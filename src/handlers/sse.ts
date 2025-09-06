@@ -5,7 +5,8 @@ import { Room } from "../schema/types";
 export const rooms = new Map<number, Room>();
 const clients = new Map<number, Set<WritableStreamDefaultWriter>>();
 
-export async function handleSSE(request: Request): Promise<Response> {
+//export async function handleSSE(request: Request): Promise<Response> {
+export async function sse(request: Request): Promise<Response> {
   // id を一発でパース、なければ 400
   const id = Number(new URL(request.url).searchParams.get("id"));
   if (!id) return new Response("Invalid room id", { status: 400 });

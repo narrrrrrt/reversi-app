@@ -1,7 +1,9 @@
 //join
 import { rooms, broadcast } from "./sse";
 
-export async function handleJoin(request: Request): Promise<Response> {
+//export async function handleJoin(request: Request): Promise<Response> {
+export async function join(request: Request): Promise<Response> {
+
   const url = new URL(request.url);
 
   const id = Number(url.searchParams.get("id"));
