@@ -14,3 +14,4 @@ export default {
     return stub.fetch(request);
   },
 };
+export { ReversiDO } from "./reversi-do";
