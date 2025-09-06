@@ -14,7 +14,7 @@ class_name = "ReversiDO"
 
 [[migrations]]
 tag = "vxxx"
-delete_classes = ["CounterDO"]
+#delete_classes = ["CounterDO"]
 #new_classes = ["ReversiDO"]
 
 
