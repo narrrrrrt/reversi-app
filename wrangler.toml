@@ -14,8 +14,12 @@ class_name = "ReversiDO"
 
 [[migrations]]
 tag = "v1"
+delete_classes = ["CounterDO"]
+new_classes = ["ReversiDO"]
+
+
 # 初回作成時はこちらを有効にする
-new_sqlite_classes = ["ReversiDO"]
+#new_sqlite_classes = ["ReversiDO"]
 
 # 既に作成済みの DO を再利用するときはこちらを使う
 #new_classes = ["ReversiDO"]
