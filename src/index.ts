@@ -1,27 +1,30 @@
-// index.ts
-export interface Env {
-  ASSETS: Fetcher;                 // wrangler.toml の [assets] バインド
-  ReversiDO: DurableObjectNamespace; // [[durable_objects.bindings]] name = "ReversiDO"
-}
+export { ReversiDO } from "./ReversiDO"; // ← 未エクスポート対策。必須
 
 export default {
-  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-    // 1) まず静的アセットを試す（404 以外なら即返す）
-    const assetResp = await env.ASSETS.fetch(request);
-    if (assetResp.status !== 404) return assetResp;
+  async fetch(request: Request, env: any): Promise<Response> {
+    // まず Assets
+    const assetRes = await env.ASSETS.fetch(request);
+    if (assetRes.status !== 404) return assetRes;
 
-    // 2) DO にフォワード（pathname + search をそのまま引き継ぐ）
-    const id = env.ReversiDO.idFromName("global");
-    const stub = env.ReversiDO.get(id);
+    try {
+      // DO スタブ
+      const id = env.ReversiDO.idFromName("global");
+      const stub = env.ReversiDO.get(id);
 
-    const doUrl = new URL(request.url);
-    doUrl.protocol = "http:";
-    doUrl.host = "do";
+      // 元リクエストの path + query をそのまま DO 用の絶対URLへ
+      const src = new URL(request.url);
+      const doUrl = new URL(src.pathname + src.search, "http://do");
+      doUrl.searchParams.set("via", "index"); // ★切り分けマーカー
 
-    // メソッド/ヘッダ/ボディは request から引き継ぎ、URL だけ差し替え
-    const doReq = new Request(doUrl.toString(), request);
-    return stub.fetch(doReq);
-
+      const doReq = new Request(doUrl.toString(), request);
+      console.log("INDEX -> DO", doUrl.toString());
+      return await stub.fetch(doReq);
+    } catch (e) {
+      console.error("INDEX_ERROR", e);
+      return new Response(
+        JSON.stringify({ where: "index", error: String(e) }),
+        { status: 500, headers: { "content-type": "application/json" } }
+      );
+    }
   },
 };
-export { ReversiDO } from "./ReversiDO";
