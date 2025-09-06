@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Index</title>
+</head>
+<body>
+  <h1>来場者カウンター + タイマー</h1>
+  <p>現在時刻: <span id="time">...</span></p>
+  <p>カウンター: <span id="count">0</span></p>
+  <p><a href="/room.html">Roomへ</a></p>
+
+  <script>
+    const evtSource = new EventSource("/events");
+    evtSource.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      document.getElementById("time").textContent = data.timestamp;
+      document.getElementById("count").textContent = data.count;
+    };
+  </script>
+</body>
+</html>
